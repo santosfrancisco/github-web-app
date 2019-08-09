@@ -7172,6 +7172,11 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-awesome-styled-grid@^2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/react-awesome-styled-grid/-/react-awesome-styled-grid-2.2.7.tgz#226a176a070dfafd3249d6688febf536989a09ea"
+  integrity sha512-INMAtF3fu8O8jkTkfj7xwoBvkcWpinxTDvupmxzU5x1DDg8uJIvfc8bgf22JSj2OXRHpw9eweSKT76UA9idZug==
+
 react-clientside-effect@^1.2.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/react-clientside-effect/-/react-clientside-effect-1.2.2.tgz#6212fb0e07b204e714581dd51992603d1accc837"
