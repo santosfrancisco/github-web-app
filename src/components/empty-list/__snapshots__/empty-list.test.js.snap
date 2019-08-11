@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EmptList /> should match default snapshot 1`] = `
+<StyledComponent
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "EmptyList-sc-1f6m2ig-0",
+        "isStatic": true,
+        "rules": Array [
+          "padding:48px;margin:0 auto;text-align:center;",
+        ],
+      },
+      "displayName": "EmptyList",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "EmptyList-sc-1f6m2ig-0",
+      "target": [Function],
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+>
+  Nenhum item encontrado
+</StyledComponent>
+`;
