@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchInput /> should match default snapshot 1`] = `
+<StyledComponent
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "_foldedDefaultProps": Object {
+        "placeholder": "O que deseja pesquisar?",
+      },
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "StyledSearchInput-sc-5q7857-0",
+        "isStatic": true,
+        "rules": Array [
+          "display:flex;.search-input__field{box-sizing:border-box;width:250px;height:48px;border:1px solid rgba(0,0,0,.3);border-radius:5px;padding:8px;&:focus{border-color:rgba(0,0,0,.75);}&::placeholder{text-align:center;}}.search-input__button{margin-left:8px;height:48px;width:48px;display:inline-flex;align-items:center;justify-content:center;background-color:#767676;color:#fff;border:1px solid #767676;border-radius:5px;}",
+        ],
+      },
+      "displayName": "SearchInput",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "StyledSearchInput-sc-5q7857-0",
+      "target": [Function],
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  placeholder="O que deseja pesquisar?"
+/>
+`;
