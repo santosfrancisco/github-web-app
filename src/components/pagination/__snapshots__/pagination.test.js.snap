@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pagination /> should match default snapshot 1`] = `
+<StyledComponent
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "_foldedDefaultProps": Object {
+        "initialPage": 1,
+        "items": Array [],
+        "pageSize": 6,
+      },
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "StyledPagination-sc-7bug5c-0",
+        "isStatic": true,
+        "rules": Array [
+          "width:100%;text-align:center;font-family:var(--site-font);.pagination{padding:16px 0;display:inline-flex;}.page-item{width:32px;height:32px;border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid transparent;:hover{border:1px solid rgba(0,0,0,.5);}}.page-item + .page-item{margin-left:8px;}.active{border:1px solid rgba(0,0,0,.5);font-size:24px;}.disabled{color:rgba(0,0,0,.3);pointer-events:none;}",
+        ],
+      },
+      "displayName": "Pagination",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "StyledPagination-sc-7bug5c-0",
+      "target": [Function],
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  initialPage={1}
+  items={Array []}
+  pageSize={6}
+/>
+`;
