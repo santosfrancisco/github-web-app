@@ -1,44 +1,31 @@
-import React, { Component } from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { MdSearch } from 'react-icons/md'
 
-class SearchInput extends Component {
-  constructor () {
-    super()
-    this.searchField = React.createRef()
+const SearchInput = ({ className, placeholder, onRequest }) => {
+  const searchField = useRef()
+  const searchRequest = () => {
+    const { value } = searchField.current
+    onRequest && onRequest(value)
   }
-
-  searchRequest = () => {
-    const { onRequest } = this.props
-    const searchQuery = this.searchField.current.value
-    onRequest && onRequest(searchQuery)
-  }
-
-  handleClick = () => this.searchRequest()
-
-  handleKeyDown = e => e.key === 'Enter' && this.searchRequest()
-
-  render () {
-    const { className, placeholder } = this.props
-    return (
-      <div className={className}>
-        <input
-          ref={this.searchField}
-          className='search-input__field'
-          type='text'
-          onKeyDown={this.handleKeyDown}
-          placeholder={placeholder}
-        />
-        <button
-          className='search-input__button'
-          type='button'
-          onClick={this.handleClick}
-        >
-          <MdSearch size={24} />
-        </button>
-      </div>
-    )
-  }
+  return (
+    <div className={className}>
+      <input
+        ref={searchField}
+        className='search-input__field'
+        type='text'
+        onKeyDown={e => e.key === 'Enter' && searchRequest()}
+        placeholder={placeholder}
+      />
+      <button
+        className='search-input__button'
+        type='button'
+        onClick={searchRequest}
+      >
+        <MdSearch size={24} />
+      </button>
+    </div>
+  )
 }
 
 const StyledSearchInput = styled(SearchInput)`
