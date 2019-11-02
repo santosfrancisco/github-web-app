@@ -1,4 +1,5 @@
 import 'jest-styled-components'
+import { act } from 'react-dom/test-utils'
 
 import React from 'react'
 import { shallow, mount } from 'enzyme'
@@ -28,7 +29,9 @@ describe('<Pagination />', () => {
     )
     expect(mockFn.mock.calls[0][0].length).toBe(props.pageSize)
     expect(mockFn.mock.calls[0][1]).toBe(1)
-    component.find('#next-page').prop('onClick')()
+    act(() => {
+      component.find('#next-page').prop('onClick')()
+    })
     expect(mockFn.mock.calls[1][0].length).toBe(repos.length - props.pageSize)
     expect(mockFn.mock.calls[1][1]).toBe(2)
   })
