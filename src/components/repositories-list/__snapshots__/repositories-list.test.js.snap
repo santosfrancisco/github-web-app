@@ -6,7 +6,7 @@ exports[`<RepositoriesList /> should match default snapshot 1`] = `
     Object {
       "$$typeof": Symbol(react.forward_ref),
       "_foldedDefaultProps": Object {
-        "repos": Array [],
+        "repositories": Array [],
       },
       "attrs": Array [],
       "componentStyle": ComponentStyle {
@@ -27,7 +27,7 @@ exports[`<RepositoriesList /> should match default snapshot 1`] = `
     }
   }
   forwardedRef={null}
-  repos={
+  repositories={
     Array [
       Object {
         "archive_url": "https://api.github.com/repos/santosfrancisco/gatsby-starter-cv/{archive_format}{/ref}",

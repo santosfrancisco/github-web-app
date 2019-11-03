@@ -5,27 +5,27 @@ import { shallow, mount } from 'enzyme'
 import { MemoryRouter } from 'react-router-dom'
 import RepositoriesList from './'
 
-import repos from '../../mock/repositories'
+import repositories from '../../mock/repositories'
 
 describe('<RepositoriesList />', () => {
   it('should match default snapshot', () => {
-    const component = shallow(<RepositoriesList repos={repos} />)
+    const component = shallow(<RepositoriesList repositories={repositories} />)
     expect(component).toMatchSnapshot()
   })
 
   it('should render the repositories correctly', () => {
     const component = mount(
       <MemoryRouter>
-        <RepositoriesList repos={repos} />
+        <RepositoriesList repositories={repositories} />
       </MemoryRouter>)
 
-    expect(component.find('li').length).toEqual(repos.length)
+    expect(component.find('li').length).toEqual(repositories.length)
   })
 
   it('should render the empty list message if no repositories exists', () => {
     const component = mount(
       <MemoryRouter>
-        <RepositoriesList repos={[]} />
+        <RepositoriesList repositories={[]} />
       </MemoryRouter>)
 
     expect(component.find('EmptyList').exists()).toBe(true)
