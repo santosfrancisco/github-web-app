@@ -3,7 +3,7 @@ language:
 node_js:
   - "8"
 install:
-  - yarn add -g codecov
+  - yarn add global codecov
   - yarn install
 script:
   - yarn test
