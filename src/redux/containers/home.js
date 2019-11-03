@@ -8,7 +8,7 @@ import Home from '../../components/pages/home'
 const HomeContainer = props => <Home {...props} />
 
 const mapStateToProps = state => ({
-  repos: state.repositories,
+  repositories: state.repositories,
   isLoading: getIsLoading(state),
   errorMessage: state.errorMessage
 })

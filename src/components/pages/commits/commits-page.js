@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { toastr } from 'react-redux-toastr'
 import Layout from '../../layout'
@@ -7,84 +7,74 @@ import Pagination from '../../pagination'
 import SearchInput from '../../search-input'
 import CommitsList from '../../commits-list'
 
-class CommitsPage extends Component {
-  state = {
-    filter: '',
-    filteredCommits: [],
-    pageItems: [],
-    currentPage: 1
-  }
+const CommitsPage = ({
+  className,
+  isLoading,
+  getCommits,
+  commits,
+  errorMessage,
+  match,
+  location,
+  history
+}) => {
+  const [filteredCommits, setFilteredCommits] = useState([])
+  const [pageItems, setPageItems] = useState([])
+  const [filter, setFilter] = useState('')
 
-  getCurrentPage = () => {
-    const { location } = this.props
+  const getCurrentPage = () => {
     const search = new URLSearchParams(location.search)
     const currentPage = parseInt(search.get('page'))
     return currentPage || 1
   }
 
-  filterCommits = () => {
-    const { filter } = this.state
-    const { commits } = this.props
+  const filterCommits = () => {
     let filteredCommits = commits
     if (filter) {
       filteredCommits = filteredCommits.filter(
         ({ commit }) => commit.message.toLowerCase().includes(filter)
       )
     }
-    this.setState({ filteredCommits })
+    setFilteredCommits(filteredCommits)
   }
 
-  componentDidMount () {
-    const { match, getCommits, commits } = this.props
+  const handleChangePage = (pageItems, page) => {
+    setPageItems(pageItems)
+    history.push(`?page=${page}`)
+  }
+
+  const handleFilter = query => setFilter(query)
+
+  useEffect(() => {
     const { user, repo } = match.params
     getCommits && getCommits(user, repo)
-    commits && this.filterCommits()
-    const currentPage = this.getCurrentPage()
-    this.setState({ currentPage })
-  }
+  }, [])
 
-  componentDidUpdate (prevProps) {
-    if (this.props.commits !== prevProps.commits) {
-      const { errorMessage } = this.props
-      errorMessage && toastr.error(errorMessage)
-      this.filterCommits()
-    }
-  }
+  useEffect(() => filterCommits(), [commits, filter])
 
-  handleChangePage = (pageItems, page) => {
-    this.setState({ pageItems })
-    this.props.history.push(`?page=${page}`)
-  }
+  useEffect(() => {
+    errorMessage && toastr.error(errorMessage)
+  }, [errorMessage])
 
-  handleFilter = filter => this.setState(
-    { filter: filter.toLowerCase() },
-    () => this.filterCommits()
+  return (
+    <Layout className={className}>
+      <SearchInput
+        className='commits-page__search-input'
+        placeholder='pesquisar...'
+        onRequest={handleFilter}
+      />
+      {isLoading
+        ? <Loader />
+        : <div>
+          <CommitsList commits={pageItems} />
+          <Pagination
+            items={filteredCommits}
+            initialPage={getCurrentPage()}
+            onChangePage={handleChangePage}
+          />
+        </div>
+      }
+    </Layout>
   )
-
-  render () {
-    const { currentPage, pageItems, filteredCommits } = this.state
-    const { className, isLoading } = this.props
-    return (
-      <Layout className={className}>
-        <SearchInput
-          className='commits-page__search-input'
-          placeholder='pesquisar...'
-          onRequest={this.handleFilter}
-        />
-        {isLoading
-          ? <Loader />
-          : <div>
-            <CommitsList commits={pageItems} />
-            <Pagination
-              items={filteredCommits}
-              initialPage={currentPage}
-              onChangePage={this.handleChangePage}
-            />
-          </div>
-        }
-      </Layout>
-    )
-  }
 }
 
 const StyledCommitsPage = styled(CommitsPage)`

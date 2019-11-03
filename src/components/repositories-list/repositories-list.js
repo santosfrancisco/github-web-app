@@ -4,27 +4,27 @@ import styled from 'styled-components'
 import { MdStar } from 'react-icons/md'
 import EmptyList from '../empty-list'
 
-const RepositoriesList = ({ className, repos }) => {
+const RepositoriesList = ({ className, repositories }) => {
   return (
     <React.Fragment>
       <h2>Lista de repositórios</h2>
       <ul className={className}>
-        {repos.length > 0 ? repos.map(repo => <li key={repo.name}>
+        {repositories.length > 0 ? repositories.map(repositorie => <li key={repositorie.name}>
           <div className='repositories_list__header'>
             <h3>
               <Link
                 className='repositories-list__link'
-                to={`/${repo.full_name.toLowerCase()}`}
+                to={`/${repositorie.full_name.toLowerCase()}`}
               >
-                {repo.name}
+                {repositorie.name}
               </Link>
             </h3>
             <div className='repositories-list__stars'>
-              <MdStar /> {repo.stargazers_count}
+              <MdStar /> {repositorie.stargazers_count}
             </div>
           </div>
           <div>
-            <p>{repo.description}</p>
+            <p>{repositorie.description}</p>
           </div>
           <hr className='repositories-list__separator' />
         </li>)
@@ -60,7 +60,7 @@ const StyledRepositoriesList = styled(RepositoriesList)`
 StyledRepositoriesList.displayName = 'RepositoriesList'
 
 StyledRepositoriesList.defaultProps = {
-  repos: []
+  repositories: []
 }
 
 export default StyledRepositoriesList

@@ -7,6 +7,7 @@ exports[`<SearchInput /> should match default snapshot 1`] = `
       "$$typeof": Symbol(react.forward_ref),
       "_foldedDefaultProps": Object {
         "placeholder": "O que deseja pesquisar?",
+        "value": "",
       },
       "attrs": Array [],
       "componentStyle": ComponentStyle {
@@ -28,5 +29,6 @@ exports[`<SearchInput /> should match default snapshot 1`] = `
   }
   forwardedRef={null}
   placeholder="O que deseja pesquisar?"
+  value=""
 />
 `;

@@ -30,9 +30,7 @@ describe('<CommitsPage />', () => {
     const SearchInputComponent = component.find('SearchInput')
 
     SearchInputComponent.find('input.search-input__field').instance().value = 'adding'
-    SearchInputComponent.find('button.search-input__button').prop('onClick')()
-
-    component.update()
+    SearchInputComponent.find('button.search-input__button').simulate('click')
 
     const CommitsListComponent = component.find('CommitsList')
 

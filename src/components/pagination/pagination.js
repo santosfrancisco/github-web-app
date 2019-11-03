@@ -1,32 +1,30 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
 import styled from 'styled-components'
-import { MdFirstPage, MdLastPage, MdNavigateBefore, MdNavigateNext } from 'react-icons/md'
+import {
+  MdFirstPage,
+  MdLastPage,
+  MdNavigateBefore,
+  MdNavigateNext
+} from 'react-icons/md'
 
-class Pagination extends React.Component {
-  state = { pager: {} }
+const Pagination = ({
+  className,
+  onChangePage,
+  initialPage,
+  items,
+  pageSize
+}) => {
+  const [pager, setPager] = useState({})
 
-  componentDidMount () {
-    if (this.props.items) {
-      this.setPage(this.props.initialPage)
-    }
-  }
-
-  componentDidUpdate (prevProps) {
-    if (this.props.items !== prevProps.items) {
-      this.setPage(this.props.initialPage)
-    }
-  }
-
-  setPage = (page) => {
-    const { items, pageSize } = this.props
-    const pager = this.getPager(items.length, page, pageSize)
+  const setPage = (page) => {
+    const pager = getPager(items.length, page, pageSize)
     const pageItems = items.slice(pager.startIndex, pager.endIndex + 1)
-    this.setState({ pager })
-    this.props.onChangePage(pageItems, pager.currentPage)
+    setPager(pager)
+    onChangePage && onChangePage(pageItems, pager.currentPage)
   }
 
-  getPager = (totalItems, currentPage, pageSize) => {
+  const getPager = (totalItems, currentPage, pageSize) => {
     const totalPages = Math.ceil(totalItems / pageSize)
 
     if (currentPage > totalPages || currentPage < 1) currentPage = 1
@@ -67,30 +65,31 @@ class Pagination extends React.Component {
     }
   }
 
-  render () {
-    const { className } = this.props
-    const { pager } = this.state
-    if (!pager.pages || pager.pages.length <= 1) {
-      return null
-    }
+  useEffect(() => {
+    setPage(initialPage)
+  }, [initialPage, items])
+
+  if (!pager.pages || pager.pages.length <= 1) {
+    return null
+  } else {
     return (
       <div className={className}>
         <ul className='pagination'>
-          <li id='first-page' className={classnames('page-item', { 'disabled': pager.currentPage === 1 })} onClick={() => this.setPage(1)}>
+          <li id='first-page' className={classnames('page-item', { disabled: pager.currentPage === 1 })} onClick={() => setPage(1)}>
             <MdFirstPage />
           </li>
-          <li id='previous-page' className={classnames('page-item', { 'disabled': pager.currentPage === 1 })} onClick={() => this.setPage(pager.currentPage - 1)}>
+          <li id='previous-page' className={classnames('page-item', { disabled: pager.currentPage === 1 })} onClick={() => setPage(pager.currentPage - 1)}>
             <MdNavigateBefore />
           </li>
           {pager.pages.map((page, index) =>
-            (<li id={`page-${page}`} key={index} className={classnames('page-item', { 'active': pager.currentPage === page })} onClick={() => this.setPage(page)}>
+            (<li id={`page-${page}`} key={index} className={classnames('page-item', { active: pager.currentPage === page })} onClick={() => setPage(page)}>
               <span>{page}</span>
             </li>)
           )}
-          <li id='next-page' className={classnames('page-item', { 'disabled': pager.currentPage === pager.totalPages })} onClick={() => this.setPage(pager.currentPage + 1)}>
+          <li id='next-page' className={classnames('page-item', { disabled: pager.currentPage === pager.totalPages })} onClick={() => setPage(pager.currentPage + 1)}>
             <MdNavigateNext />
           </li>
-          <li id='last-page' className={classnames('page-item', { 'disabled': pager.currentPage === pager.totalPages })} onClick={() => this.setPage(pager.totalPages)}>
+          <li id='last-page' className={classnames('page-item', { disabled: pager.currentPage === pager.totalPages })} onClick={() => setPage(pager.totalPages)}>
             <MdLastPage />
           </li>
         </ul>
@@ -100,7 +99,7 @@ class Pagination extends React.Component {
 }
 
 const StyledPagination = styled(Pagination)`
-width: 100%;
+  width: 100%;
   text-align: center;
   font-family: var(--site-font);
   .pagination {

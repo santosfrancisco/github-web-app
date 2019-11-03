@@ -8,6 +8,6 @@ import repositories from '../../mock/repositories'
 storiesOf('Components/RepositoriesList', module)
   .add('default', () => (
     <MemoryRouter>
-      <RepositoriesList repos={repositories} />
+      <RepositoriesList repositories={repositories} />
     </MemoryRouter>)
   )
