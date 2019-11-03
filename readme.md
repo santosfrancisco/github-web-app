@@ -1,4 +1,6 @@
 # Github web app
+[![travisci](https://travis-ci.com/santosfrancisco/github-web-app.svg?branch=master)](https://travis-ci.com/santosfrancisco/github-web-app.svg?branch=master)
+[![codecov](https://codecov.io/gh/santosfrancisco/github-web-app/branch/master/graph/badge.svg)](https://codecov.io/gh/santosfrancisco/github-web-app)
 
 >Demo [https://githubwebapp.netlify.com](https://githubwebapp.netlify.com)
 
