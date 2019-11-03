@@ -10,6 +10,12 @@ describe('<SearchInput />', () => {
     expect(component).toMatchSnapshot()
   })
 
+  it('should render with initial value', () => {
+    const value = 'username'
+    const component = mount(<SearchInput value={value} />)
+    expect(component.find('input.search-input__field').prop('defaultValue')).toEqual(value)
+  })
+
   it('should send a value to search', () => {
     const mockRequestFn = jest.fn()
     const searchquery = 'username'

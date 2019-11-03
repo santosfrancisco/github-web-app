@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { MdSearch } from 'react-icons/md'
 
-const SearchInput = ({ className, placeholder, onRequest }) => {
+const SearchInput = ({ className, placeholder, onRequest, value }) => {
   const searchField = useRef()
   const searchRequest = () => {
     const { value } = searchField.current
@@ -16,6 +16,7 @@ const SearchInput = ({ className, placeholder, onRequest }) => {
         type='text'
         onKeyDown={e => e.key === 'Enter' && searchRequest()}
         placeholder={placeholder}
+        defaultValue={value}
       />
       <button
         className='search-input__button'
@@ -59,7 +60,8 @@ const StyledSearchInput = styled(SearchInput)`
 `
 
 StyledSearchInput.defaultProps = {
-  placeholder: 'O que deseja pesquisar?'
+  placeholder: 'O que deseja pesquisar?',
+  value: ''
 }
 
 StyledSearchInput.displayName = 'SearchInput'
