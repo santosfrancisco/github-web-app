@@ -8,7 +8,7 @@ import repos from '../../../mock/repositories'
 storiesOf('Pages/HomePage', module)
   .add('default', () => (
     <MemoryRouter initialEntries={['/']}>
-      <Route path='/' component={props => <HomePage repos={repos} {...props} />} />
+      <Route path='/' component={props => <HomePage repositories={repos} {...props} />} />
     </MemoryRouter>
   )
   )

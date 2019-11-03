@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { toastr } from 'react-redux-toastr'
 import Layout from '../../layout'
@@ -7,62 +7,69 @@ import Pagination from '../../pagination'
 import SearchInput from '../../search-input'
 import RepositoriesList from '../../repositories-list'
 
-class HomePage extends Component {
-  state = {
-    pageItems: [],
-    currentPage: 1
+const HomePage = ({
+  className,
+  isLoading,
+  getRepositories,
+  repositories,
+  errorMessage,
+  history,
+  location,
+  match
+}) => {
+  const [pageItems, setPageItems] = useState([])
+
+  const getUser = () => {
+    const { user } = match.params
+    return user
   }
 
-  getCurrentPage = () => {
-    const { location } = this.props
+  const getCurrentPage = () => {
     const search = new URLSearchParams(location.search)
     const currentPage = parseInt(search.get('page'))
     return currentPage || 1
   }
 
-  componentDidUpdate (prevProps) {
-    if (this.props !== prevProps) {
-      const { errorMessage } = this.props
-      errorMessage && toastr.error(errorMessage)
-    }
-  }
-
-  handleSearchRequest = user => {
+  const handleSearchRequest = user => {
     if (!user) return
-    this.setState({ user })
-    const { getRepositories } = this.props
     getRepositories && getRepositories(user)
+    history.push(`/${user}`)
   }
 
-  handleChangePage = (pageItems, page) => {
-    this.setState({ pageItems })
-    this.props.history.push(`?page=${page}`)
+  const handleChangePage = (pageItems, page) => {
+    setPageItems(pageItems)
+    if (pageItems.length) history.push(`?page=${page}`)
   }
 
-  render () {
-    const { currentPage, pageItems } = this.state
-    const { className, isLoading, repos } = this.props
-    return (
-      <Layout className={className}>
-        <SearchInput
-          className='home-page__search-input'
-          placeholder='Informe um usuário github'
-          onRequest={this.handleSearchRequest}
-        />
-        {isLoading
-          ? <Loader />
-          : <div>
-            {pageItems.length > 0 && <RepositoriesList repos={pageItems} />}
-            <Pagination
-              items={repos}
-              initialPage={currentPage}
-              onChangePage={this.handleChangePage}
-            />
-          </div>
-        }
-      </Layout>
-    )
-  }
+  useEffect(() => {
+    const user = getUser()
+    if (user) getRepositories(user)
+  }, [])
+
+  useEffect(() => {
+    errorMessage && toastr.error(errorMessage)
+  }, [errorMessage])
+  return (
+    <Layout className={className}>
+      <SearchInput
+        className='home-page__search-input'
+        placeholder='Informe um usuário github'
+        onRequest={handleSearchRequest}
+        value={getUser()}
+      />
+      {isLoading
+        ? <Loader />
+        : <div>
+          {pageItems.length > 0 && <RepositoriesList repositories={pageItems} />}
+          <Pagination
+            items={repositories}
+            initialPage={getCurrentPage()}
+            onChangePage={handleChangePage}
+          />
+        </div>
+      }
+    </Layout>
+  )
 }
 
 const StyledHomePage = styled(HomePage)`
@@ -78,7 +85,7 @@ const StyledHomePage = styled(HomePage)`
 StyledHomePage.displayName = 'HomePage'
 
 StyledHomePage.defaultProps = {
-  repos: []
+  repositories: []
 }
 
 export default StyledHomePage
