@@ -32,7 +32,7 @@ export default () => {
           progressBar
           closeOnToastrClick />
         <Switch>
-          <Route path='/' exact component={Home} />
+          <Route path='/:user?' exact component={Home} />
           <Route path='/:user/:repo' exact component={Commits} />
           <Route component={NotFound} />
         </Switch>
