@@ -6,6 +6,6 @@ install:
   - yarn add global codecov
   - yarn install
 script:
-  - yarn test
+  - yarn test --ci --coverage
 after_success:
   - codecov
