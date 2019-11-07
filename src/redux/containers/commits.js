@@ -1,19 +1,22 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { getCommits } from '../actions/commits'
-import { getIsLoading } from '../selectors/util'
 import Commits from '../../components/pages/commits'
 
-const CommitsContainer = props => <Commits {...props} />
+const CommitsContainer = props => {
+  const commits = useSelector(state => state.commits)
+  const isLoading = useSelector(state => state.isLoading)
+  const errorMessage = useSelector(state => state.errorMessage)
+  const dispatch = useDispatch()
+  return (
+    <Commits
+      commits={commits}
+      isLoading={isLoading}
+      errorMessage={errorMessage}
+      getCommits={(user, repositorie) => dispatch(getCommits(user, repositorie))}
+      {...props}
+    />
+  )
+}
 
-const mapStateToProps = state => ({
-  commits: state.commits,
-  isLoading: getIsLoading(state),
-  errorMessage: state.errorMessage
-})
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getCommits }, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(CommitsContainer)
+export default CommitsContainer
