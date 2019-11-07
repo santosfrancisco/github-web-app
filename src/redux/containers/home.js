@@ -1,19 +1,22 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { getRepositories } from '../actions/repositories'
-import { getIsLoading } from '../selectors/util'
 import Home from '../../components/pages/home'
 
-const HomeContainer = props => <Home {...props} />
+const HomeContainer = props => {
+  const repositories = useSelector(state => state.repositories)
+  const isLoading = useSelector(state => state.isLoading)
+  const errorMessage = useSelector(state => state.errorMessage)
+  const dispatch = useDispatch()
+  return (
+    <Home
+      repositories={repositories}
+      isLoading={isLoading}
+      errorMessage={errorMessage}
+      getRepositories={user => dispatch(getRepositories(user))}
+      {...props}
+    />
+  )
+}
 
-const mapStateToProps = state => ({
-  repositories: state.repositories,
-  isLoading: getIsLoading(state),
-  errorMessage: state.errorMessage
-})
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getRepositories }, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)
+export default HomeContainer
