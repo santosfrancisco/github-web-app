@@ -13,7 +13,7 @@ const CommitsContainer = props => {
       commits={commits}
       isLoading={isLoading}
       errorMessage={errorMessage}
-      getCommits={(user, repositorie) => dispatch(getCommits(user, repositorie))}
+      getCommits={(user, repository) => dispatch(getCommits(user, repository))}
       {...props}
     />
   )

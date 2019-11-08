@@ -9,22 +9,22 @@ const RepositoriesList = ({ className, repositories }) => {
     <React.Fragment>
       <h2>Lista de repositórios</h2>
       <ul className={className}>
-        {repositories.length > 0 ? repositories.map(repositorie => <li key={repositorie.name}>
+        {repositories.length > 0 ? repositories.map(repository => <li key={repository.name}>
           <div className='repositories_list__header'>
             <h3>
               <Link
                 className='repositories-list__link'
-                to={`/${repositorie.full_name.toLowerCase()}`}
+                to={`/${repository.full_name.toLowerCase()}`}
               >
-                {repositorie.name}
+                {repository.name}
               </Link>
             </h3>
             <div className='repositories-list__stars'>
-              <MdStar /> {repositorie.stargazers_count}
+              <MdStar /> {repository.stargazers_count}
             </div>
           </div>
           <div>
-            <p>{repositorie.description}</p>
+            <p>{repository.description}</p>
           </div>
           <hr className='repositories-list__separator' />
         </li>)
