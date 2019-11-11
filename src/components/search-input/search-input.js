@@ -32,9 +32,10 @@ const SearchInput = ({ className, placeholder, onRequest, value }) => {
 const StyledSearchInput = styled(SearchInput)`
   display: flex;
   .search-input__field {
-    box-sizing: border-box; 
-    width: 250px;
-    height: 48px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 250px;
+    height: 32px;
     border: 1px solid rgba(0,0,0,.3);
     border-radius: 5px;
     padding: 8px;
@@ -47,15 +48,15 @@ const StyledSearchInput = styled(SearchInput)`
   }
   .search-input__button {
     margin-left: 8px;
-    height: 48px;
-    width: 48px;
+    height: 32px;
+    width: 32px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #767676;
+    background-color: #000;
     color: #fff;
-    border: 1px solid #767676;
-    border-radius: 5px;
+    border: 1px solid #000;
+    border-radius: 16px;
   }
 `
 

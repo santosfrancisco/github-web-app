@@ -5,27 +5,32 @@ import { GoMarkGithub } from 'react-icons/go'
 import styled from 'styled-components'
 
 const Layout = styled(({ className, children }) => (
-  <Container className={className}>
-    <Row >
-      <Col className='layout__nav-wrapper'>
-        <nav className='layout__nav'>
-          <Link className='layout__nav-link' to='/'>
-            home
-          </Link>
-          <a className='layout__nav-link' href='https://github.com/' target='_blank'>
-            <GoMarkGithub size={32} />
-          </a>
-        </nav>
-      </Col>
-    </Row>
-    <Row className='layout__content'>
-      <Col xs={4}>{children}</Col>
-    </Row>
-  </Container>
+  <div className={className}>
+    <div className='layout__nav-wrapper'>
+      <Container>
+        <Row>
+          <Col as='nav' className='layout__nav'>
+            <Link className='layout__nav-link' to='/'>
+                home
+            </Link>
+            <a className='layout__nav-link' href='https://github.com/' target='_blank'>
+              <GoMarkGithub size={32} />
+            </a>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+    <Container>
+      <Row className='layout__content'>
+        <Col xs={4}>{children}</Col>
+      </Row>
+    </Container>
+  </div>
 ))`
   .layout__nav-wrapper {
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
     position: fixed;
+    height: 48px;
     width: 100%;
     top: 0;
     left: 0;
@@ -36,15 +41,10 @@ const Layout = styled(({ className, children }) => (
     background-color: #fff;
   }
   .layout__nav {
-    padding: 0 16px;
-    height: 60px;
-    display: flex;
     flex-direction: row;
-    z-index: 100;
     justify-content: space-between;
-    overflow-x: auto;
-    overflow-y: hidden;
-    background-color: #fff;
+    align-items: center;
+    height: 48px;
   }
   .layout__nav-link {
     color: #000;
@@ -58,6 +58,7 @@ const Layout = styled(({ className, children }) => (
   }
   .layout__content {
     margin-top: 70px;
+    position: relative;
   }
 `
 Layout.displayName = 'Layout'

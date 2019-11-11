@@ -13,7 +13,7 @@ const HomeContainer = props => {
       repositories={repositories}
       isLoading={isLoading}
       errorMessage={errorMessage}
-      getRepositories={user => dispatch(getRepositories(user))}
+      getRepositories={({ user, after, before, first, last }) => dispatch(getRepositories({ user, after, before, first, last }))}
       {...props}
     />
   )

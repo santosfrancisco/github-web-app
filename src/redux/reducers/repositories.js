@@ -2,7 +2,13 @@ import {
   GET_REPOS_SUCCESS
 } from '../constants'
 
-export const repositories = (state = [], action) => {
+const initialState = {
+  nodes: [],
+  totalCount: 0,
+  pageInfo: {}
+}
+
+export const repositories = (state = initialState, action) => {
   switch (action.type) {
     case GET_REPOS_SUCCESS:
       return action.payload

@@ -7,19 +7,19 @@ const CommitsList = ({ className, commits }) => {
     <React.Fragment>
       <h2>Lista de commits</h2>
       <ul className={className}>
-        {commits.length > 0 ? commits.map(({ commit, sha, html_url: url }) =>
-          <li key={sha}>
+        {commits.length > 0 ? commits.map(commit =>
+          <li key={commit.oid}>
             <h3>
               <a
                 className='commits-list__link'
-                href={url}
+                href={commit.url}
                 target='_blank'
               >
-                <span>{commit.message}</span>
+                <span>{commit.messageHeadline}</span>
               </a>
             </h3>
             <p>
-              <strong>{commit.author.name}</strong> em {new Date(commit.author.date).toUTCString()}
+              <strong>{commit.author.name}</strong> em {new Date(commit.committedDate).toUTCString()}
             </p>
             <hr className='commits-list__separator' />
           </li>)

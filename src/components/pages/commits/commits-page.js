@@ -28,7 +28,7 @@ const CommitsPage = ({
   }
 
   const filterCommits = () => {
-    let filteredCommits = commits
+    let filteredCommits = commits.nodes
     if (filter) {
       filteredCommits = filteredCommits.filter(
         ({ commit }) => commit.message.toLowerCase().includes(filter)
